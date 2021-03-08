@@ -1,0 +1,19 @@
+header:
+  seq: 0
+  stamp:
+    secs: 1598595969
+    nsecs: 0
+  frame_id: novatel
+child_frame_id: rs_bpearl_right
+
+transform:
+  translation:
+    x: 1.039636
+    y: -3.047127
+    z: -0.600755
+  rotation:
+    x: 0.705404
+    y: -0.141228
+    z: 0.676625
+    w: -0.156967
+

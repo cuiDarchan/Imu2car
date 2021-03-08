@@ -1,0 +1,34 @@
+<launch>
+
+ <!--the first lidar-->
+  <arg name="extrinsics_16_left_to_novatel" default="$(find imu2car)/params/velodyne16_left_novatel_extrinsics.yaml"/> 
+  <arg name="extrinsics_16_right_to_novatel" default="$(find imu2car)/params/velodyne16_right_novatel_extrinsics.yaml"/> 
+  <arg name="extrinsics_bp_left_left_to_novatel" default="$(find imu2car)/params/bpearl_left_novatel_extrinsics.yaml"/> 
+  <arg name="extrinsics_bp_right_to_novatel" default="$(find imu2car)/params/bpearl_right_novatel_extrinsics.yaml"/> 
+  <arg name="extrinsics_livox_front_to_novatel" default="$(find imu2car)/params/livox_front_novatel_extrinsics.yaml"/> 
+  <arg name="extrinsics_livox_back_to_novatel" default="$(find imu2car)/params/back_horizon80_to_novatel.yaml"/> 
+      
+  <!-- 100ms -->
+  <arg name="tf_query_timeout" default="0.1"/>
+
+   <!--rs lidar-->
+   <node name="static_transform_16_left" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_16_left_to_novatel)">
+  </node>
+
+   <node name="static_transform_16_right" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_16_right_to_novatel)">
+  </node>
+
+   <node name="static_transform_bp_left" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_bp_left_left_to_novatel)">
+  </node>
+
+   <node name="static_transform_bp_right" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_bp_right_to_novatel)">
+  </node>
+
+   <!--livox lidar-->
+   <node name="static_transform_livox_back" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_livox_back_to_novatel)">
+  </node>
+
+   <node name="static_transform_livox_front" pkg="imu2car" type="extrinsics_broadcaster.py" args="$(arg extrinsics_livox_front_to_novatel)">
+  </node>
+
+</launch>

@@ -63,7 +63,7 @@ void callback(const sensor_msgs::PointCloud2::ConstPtr &point_cloud) {
 
   double time_base = ros::Time::now().toSec();  // 加载开始
   Eigen::Matrix4d imu_to_car;
-  imu_to_car << 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1;
+  imu_to_car << 0, 1, 0, 0, -1, 0, 0, 0.75, 0, 0, 1, 0, 0, 0, 0, 1;
   pcl::transformPointCloud(*pc, *pc, imu_to_car);
 
   sensor_msgs::PointCloud2 pub_msg;
@@ -77,8 +77,10 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "imu2car");
   ros::NodeHandle nh("~");
 
+  // sub_livox_compensator_ = nh.subscribe<sensor_msgs::PointCloud2>(
+  //     "/livox_lidar_front/compensator/PointCloud2", 10, &callback);
   sub_livox_compensator_ = nh.subscribe<sensor_msgs::PointCloud2>(
-      "/livox_lidar_front/compensator/PointCloud2", 10, &callback);
+      "/rslidar_fuse_32/PointCloud2", 10, &callback);
   pub_livox_car_ = nh.advertise<sensor_msgs::PointCloud2>(
       "/livox_lidar_front/car/PointCloud2", 10);  
   ros::spin();
